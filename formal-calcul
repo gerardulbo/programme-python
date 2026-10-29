@@ -1,0 +1,44 @@
+from sympy import *
+
+x, t, xi = symbols('x t xi', real=True)
+n = symbols('n', integer=True)
+
+
+u1xt = exp(x)*(1-t)
+print("u1(x,t) =",u1xt)
+
+
+
+#------------- Calcul de u2
+u1xxi = u1xt.subs(t, xi)
+u1xxi_xi = diff(u1xxi, xi)
+u1xxi_x = diff(u1xxi, x)
+u1xxi_3x = diff(u1xxi, x, 3)
+u1xxi_5x = diff(u1xxi, x, 5)
+
+u2xt = u1xt - integrate(u1xxi_xi + u1xxi*u1xxi_x - u1xxi*u1xxi_3x + u1xxi_5x,(xi,0,t))
+u2xt_simp = simplify(u2xt)
+print(u2xt_simp)
+
+
+#------------- Calcul de u3
+u2xxi = u2xt.subs(t, xi)
+u2xxi_xi = diff(u2xxi, xi)
+u2xxi_x = diff(u2xxi, x)
+u2xxi_3x = diff(u2xxi, x, 3)
+u2xxi_5x = diff(u2xxi, x, 5)
+
+u3xt = u2xt - integrate(u2xxi_xi + u2xxi*u2xxi_x - u2xxi*u2xxi_3x + u2xxi_5x,(xi,0,t))
+u3xt_simp = simplify(u3xt)
+print(u3xt_simp)
+
+#------------- Calcul de u4
+u3xxi = u3xt.subs(t, xi)
+u3xxi_xi = diff(u3xxi, xi)
+u3xxi_x = diff(u3xxi, x)
+u3xxi_3x = diff(u3xxi, x, 3)
+u3xxi_5x = diff(u3xxi, x, 5)
+
+u4xt = u3xt - integrate(u3xxi_xi + u3xxi*u3xxi_x - u3xxi*u3xxi_3x + u3xxi_5x,(xi,0,t))
+u4xt_simp = simplify(u4xt)
+print(u4xt_simp)
